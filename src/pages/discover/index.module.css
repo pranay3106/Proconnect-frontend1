@@ -1,0 +1,35 @@
+.allUserProfile{
+  max-width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-left: 3rem;
+
+
+}
+
+
+.userCard{
+  display: flex;
+  gap: 1.2rem;
+  padding: 1.3rem;
+  align-items: center;
+  box-shadow: 10px 10px 10px 0px  rgba(167, 77, 107, 0.1);
+  border-left: 0.01rem double rgb(207, 196, 196);
+  width: 80%;
+  cursor: pointer;
+
+}
+.userCard:hover{
+transform: scale(1.04);
+  transition: 0.2s all ease-in-out;
+}
+
+.userCard_image{
+  width: 10%;
+  border-radius: 50%;
+}
+
+/*  */

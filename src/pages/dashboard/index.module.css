@@ -1,0 +1,242 @@
+.scrollComponenet{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* background: red; */
+    margin-left:1.5rem ;
+    
+}
+
+.createPostContainer{
+display: flex;
+height:15vh;
+width: 100%;
+padding-inline: 0.8rem;
+gap: 1.3rem;
+align-items: center;
+background: rgb(248, 247, 248);
+border-radius: 20px;
+position: relative;
+margin-bottom: 2rem;
+}
+
+.createPostContainer > textarea{
+    width: 100%;
+    /* width: fit-content; */
+}
+
+.fab{
+  background: rgb(4, 47, 234);
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+
+}
+
+
+.fab > svg{
+    /* width: 100%; */
+    width: fit-content;
+    width: 1.2rem;
+  height: 1.2rem;
+  color: white;
+}
+
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    min-width: 80%;
+    /* overflow: auto; */
+    
+}
+
+.uploadButton {
+  position: absolute;
+  right: -0.18rem;
+  bottom: -1rem; /* Instead of -30% which hides it */
+  background: rgb(27, 95, 232);
+  color: white;
+  border-radius: 10px;
+  padding-inline: 1.2rem;
+  padding-block: 0.6rem;
+  cursor: pointer;
+}
+
+
+
+.userProfile{
+    border-radius:100% ;
+    height: 40px;
+}
+
+.textAreaContent {
+  width: 100%;
+  height: 4rem;
+  border: 1px solid silver;
+  border-radius: 10px;
+  font-family: Arial;
+  padding: 0.8rem 1.5rem;
+  resize: none;
+}
+
+.singleCard {
+  background-color: white;            /* Clean white background */
+  border-radius: 12px;                /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow for depth */
+  padding: 1rem;                     /* Inner spacing */
+  margin-bottom: 1.5rem;             /* Space between posts */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  border: 1px solid silver;
+}
+
+
+
+
+.SingleCard{
+    width: 100%;
+    border-radius:10px 10px 0px 0px ;
+    border-bottom: 1px solid pink;
+
+}
+.singleCard_profileContainer{
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.2rem;
+    padding-right:3.4rem ;
+
+}
+.singleCard_profileContainer{
+    width: 10%;
+    border-radius: 50%;
+
+}
+
+.singleCard_img{
+    width: 100%;
+    padding-top: 0.6rem;
+    height: fit-content;
+    overflow: hidden;
+
+}
+.singleCard_img >img{
+    width: 100%;
+    height: auto;
+    object-fit: cover; 
+    /* adjust zoom in out */
+    border-radius: 20px;
+}
+
+.optionsContainer {
+   display: flex;
+   justify-content: space-around;  
+  align-items: center;
+  padding-block: 0.6rem;
+  border-top: 1px solid #ddd;
+  margin-top: 1rem;
+  color: rgb(255, 0, 251);  
+  /* border: 2px solid rgb(153, 25, 25); */
+  width: 40vw;
+
+}
+
+.singleOption_optionsContainer{
+    display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.singleOption_optionsContainer > svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  stroke-width: 1.8;
+  color: #444;
+  min-width: 1rem;
+}
+
+
+
+
+.commentsContainer{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: rgba(0,0,0,0.7);
+  overflow: hidden;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+
+}
+.allCommentsContainer{
+/* color: red; */
+min-width: 40svw;
+  width: 40vw;
+  height: 80vh;
+  background: white;
+  position: relative;
+  border-radius: 0.8rem;
+  padding: 1.4rem;
+  max-width: 1120px; 
+   /* //responsive */
+}
+
+.postCommentContainer{
+  position: absolute;
+  bottom: 1.2erm;
+  left: 1.2rem;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  bottom: 5%;
+  /* color: red; */
+
+
+  
+}
+.postCommentContainer> input{
+  flex: 0.9;
+  padding-inline:1.5rem ;
+  padding-block: 1.2rem;
+  background-color: white;
+  border-radius:0.8rem ;
+outline: none;
+border: 1px solid silver;
+
+}
+
+.postCommentContainer:focus{
+  border: 1px solid;
+}
+
+.postComment_ContainerBtn{
+
+  flex: 0.1;
+  width: fit-content;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  background: rgb(7, 159, 202);
+  text-align: center;
+  color: white;
+  cursor: pointer;
+
+}
+
+@media only screen and (max-width:600px){
+    .allCommentsContainer{
+      width: 90%;
+    }
+}

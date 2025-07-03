@@ -1,0 +1,61 @@
+.Container{
+    padding: 1.2rem;
+}
+
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbarOptions{
+    /* display: flex; */
+    /* position: absolute; */
+     /* margin-right: 6%; */
+     /* top: 5%;
+     margin-left: 65%; */
+
+
+    
+
+}
+
+.navbarOptions_div{
+    display: flex;
+}
+
+.buttonJoin{
+    
+    width: fit-content;
+    font-size: 1.4rem;
+    cursor:pointer;
+    user-select: none;
+    transition: all 0.2s;
+    margin-top: 0.8rem;
+    font-size: 1.4rem;
+    background: rgb(6, 193, 255);
+    color: white;
+    padding-inline: 1.2rem;
+    padding-block: 0.6rem;
+    border-radius: 1.3rem;
+    border: 2px solid rgb(6, 193, 255);;
+
+}
+
+.buttonJoin:hover{
+    background: white;;
+    color: rgb(6, 193, 255);;
+
+
+}
+
+.profile{
+       font-size: 1.4rem;
+    /* bakground: rgb(6, 193, 255); */
+    /* color: white; */
+    padding-inline: 1.2rem;
+    padding-block: 0.6rem;
+    border-radius: 1.3rem;
+    /* border: 2px solid rgb(6, 193, 255); */
+/*  */
+}
