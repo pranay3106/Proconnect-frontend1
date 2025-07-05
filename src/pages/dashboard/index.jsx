@@ -89,7 +89,7 @@ export default function Dashboard() {
  
 
   const getPostMediaUrl = (media) =>
-    media?.trim() ? `${Base_Url}/uploads/${media}` : null;
+    media?.trim() || null;
 
   if (!authState.user?.userId) {
     return (
@@ -110,7 +110,7 @@ export default function Dashboard() {
             <div className={styles.createPostContainer}>
               <img
                 className={styles.userProfile}
-                src={getProfileImageUrl(authState.user.profilePicture)}
+                src={getProfileImageUrl(authState.user?.userId?.profilePicture)}
                 alt="Your Profile"
               />
               <textarea
@@ -221,7 +221,7 @@ export default function Dashboard() {
                             {isVideo ? (
                               <video src={mediaUrl} controls width={300} />
                             ) : (
-                              <img src={`${Base_Url}/uploads/${post.media}`} alt="Post Media" width={300} />
+                              <img src={mediaUrl} alt="Post Media" width={300} />
                             )}
                           </div>
                         )}
@@ -292,9 +292,12 @@ export default function Dashboard() {
             >
               {postState.comments.length === 0 ? (
                 <h3>No comments yet.</h3>
+                
               ) : (
                 postState.comments.map((comment) => (
+                  
                   <div key={comment._id} className={styles.singleComment}>
+                    {console.log("comment",comment)}
                     <img
                       src={getProfileImageUrl(comment.userId)}
                       alt="Commenter"

@@ -12,25 +12,34 @@ import styles from './index.module.css'
 // Default profile picture URL
 const DEFAULT_PROFILE_PIC = "https://res.cloudinary.com/duvlhhzaq/image/upload/v1751558256/default_mkj0mm.jpg"
 
-// Checks if image is a custom image (not default)
-const isValidImage = (img) => {
-  if (!img) return false
-  return !img.toLowerCase().includes("default")
-}
 
 // Returns image URL or default
 const getProfileImageUrl = (user) => {
-  const userPic = user.profilePicture || (user.userId && user.userId.profilePicture.replace(/\\/g, "/"))
+  const userPic =
+    user?.profilePicture ||
+    user?.userId?.profilePicture?.replace(/\\/g, "/");
 
-  if (isValidImage(userPic)) {
-    return userPic.startsWith("http") ? userPic : `${Base_Url}/${userPic}`
+  if (userPic) {
+    // If hosted on Cloudinary and not default, return as is
+    if (userPic.includes("cloudinary") && !userPic.toLowerCase().includes("default")) {
+      return userPic;
+    }
+
+    // If not Cloudinary, use Base_Url for local images
+    return userPic.startsWith("http") ? userPic : `${Base_Url}/${userPic}`;
   }
+
+  // Fallback to default Cloudinary image
+  return DEFAULT_PROFILE_PIC;
+};
+
+
+
+
   
       // `${Base_Url}/${userProfile.userId.profilePicture.replace(/\\/g, "/")}` || 
       // "https://res.cloudinary.com/duvlhhzaq/image/upload/v1751558256/default_mkj0mm.jpg"
 
-  return DEFAULT_PROFILE_PIC
-}
 
 export default function DiscoverPage() {
   const router = useRouter()

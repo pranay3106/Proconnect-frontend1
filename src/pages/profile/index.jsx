@@ -136,10 +136,18 @@ useEffect(() => {
                 <input onChange={(e)=>{
                    updateProfilePicture(e.target.files[0])
                 }} hidden type="file" name="" id="profilePictureUpload" />
-          <img   src={
+          {/* <img   src={
     `${Base_Url}/${userProfile.userId.profilePicture.replace(/\\/g, "/")}` || 
     "https://res.cloudinary.com/duvlhhzaq/image/upload/v1751558256/default_mkj0mm.jpg"
-  }/>
+  }/> */}
+
+  <img
+  src={
+    userProfile?.userId?.profilePicture?.includes("cloudinary")
+      ? userProfile.userId.profilePicture
+      : `${Base_Url}/${userProfile.userId.profilePicture.replace(/\\/g, "/")}`
+  }
+/>
   {console.log(userProfile.userId)}
           
 

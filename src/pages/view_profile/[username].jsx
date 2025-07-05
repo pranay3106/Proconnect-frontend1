@@ -15,16 +15,27 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const DEFAULT_PROFILE_PIC = "https://res.cloudinary.com/duvlhhzaq/image/upload/v1751558256/default_mkj0mm.jpg"
 
-// Checks if image is custom or not
-const isValidImage = (img) => {
-  if (!img) return false
-  return !img.toLowerCase().includes("default")
-}
+
 
 const getProfileImageUrl = (user) => {
-  const img = user.profilePicture
-  return isValidImage(img) ? `${Base_Url}/uploads/${img}` : DEFAULT_PROFILE_PIC
-}
+  const userPic =
+    user?.profilePicture ||
+    user?.userId?.profilePicture?.replace(/\\/g, "/");
+
+  if (userPic) {
+    // If hosted on Cloudinary and not default, return as is
+    if (userPic.includes("cloudinary") && !userPic.toLowerCase().includes("default")) {
+      return userPic;
+    }
+
+    // Else fallback to local image if not Cloudinary
+    return userPic.startsWith("http") ? userPic : `${Base_Url}/${userPic}`;
+  }
+
+  // If nothing valid, use default
+  return DEFAULT_PROFILE_PIC;
+};
+
 
 export default function ViewProfilePage({ userProfile }) {
   const router = useRouter()
@@ -119,10 +130,30 @@ export default function ViewProfilePage({ userProfile }) {
                   )}
 
                   <div
+                    // onClick={async () => {
+                    //   const response = await clientServer.get(`/user/download_resume?id=${userProfile.userId._id}`)
+                    //   window.open(`${Base_Url}/${response.data.filePath}`, "_blank")
+                    // }}
+
+
                     onClick={async () => {
-                      const response = await clientServer.get(`/user/download_resume?id=${userProfile.userId._id}`)
-                      window.open(`${Base_Url}/${response.data.filePath}`, "_blank")
-                    }}
+  try {
+    const response = await clientServer.get(`/user/download_resume?id=${userProfile.userId._id}`, {
+      responseType: "blob",
+    })
+
+    const url = window.URL.createObjectURL(new Blob([response.data]))
+    const link = document.createElement("a")
+    link.href = url
+    link.setAttribute("download", `${userProfile.userId.username}-resume.pdf`)
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+  } catch (err) {
+    console.error("Failed to download resume:", err)
+  }
+}}
+
                     style={{ cursor: "pointer" }}
                   >
                     <svg style={{ width: "1.2em" }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
