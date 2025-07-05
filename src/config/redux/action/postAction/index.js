@@ -1,6 +1,6 @@
 import { clientServer } from "@/config";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { TelemetryPlugin } from "next/dist/build/webpack/plugins/telemetry-plugin/telemetry-plugin";
+// import { TelemetryPlugin } from "next/dist/build/webpack/plugins/telemetry-plugin/telemetry-plugin";
 
 
 export const getAllPosts = createAsyncThunk(
@@ -18,36 +18,21 @@ export const getAllPosts = createAsyncThunk(
     }
 );
 
-export const createPost = createAsyncThunk(
-    "post/createpost",
-    async(userData,thunkAPI)=>{
-        const{file ,body } = userData;
-
-        try{
-
-            const formData = new FormData();
-            formData.append('token',localStorage.getItem("token"))
-            formData.append('body',body)
-            formData.append('media',file)
-
-            const response = await clientServer.post("/post",formData,{
-                headers:{
-            "Content-Type" : "multipart/form-data" // ✅ correct spelling
-                        }
-            });
 
 
-            if(response.status === 200){
-                return thunkAPI.fulfillWithValue("post uploaded")
-            }else{
-                return thunkAPI.rejectWithValue("uploaded")
+export const createPost = (formData) => async (dispatch, getState) => {
+  try {
+    const res = await clientServer.post("/post", formData); // ✅ Don't set headers manually
 
-            }
-        }catch(err){
-            return thunkAPI.rejectWithValue({"message":err.message})
-        }
-    }
-)
+    dispatch({ type: "CREATE_POST_SUCCESS", payload: res.data });
+    return { payload: res.data };
+  } catch (err) {
+    console.error("Create post failed:", err);
+    return { error: err.response?.data?.message || "Failed to create post" };
+  }
+};
+
+
 
 export const deletePost = createAsyncThunk(
     "post/deletePost",

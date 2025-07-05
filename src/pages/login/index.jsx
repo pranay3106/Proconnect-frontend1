@@ -1,128 +1,123 @@
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import { loginUser, registerUser } from '@/config/redux/action/authAction';
-import { useRouter } from 'next/router'
-import React, { use, useEffect, useReducer, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import style from "./style.module.css"
-import UserLayout from '@/layout/UserLayout';
 import { emptyMessage } from '@/config/redux/reducer/authReducer';
+import UserLayout from '@/layout/UserLayout';
+import style from './style.module.css';
 
 export default function LoginComponent() {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
 
+  const [isLoginMode, setIsLoginMode] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
 
-const router = useRouter()
+  // Auto-redirect if already logged in
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      router.push('/dashboard');
+    }
+  }, []);
 
-const dispatch = useDispatch()
+  // Redirect after login
+  useEffect(() => {
+    if (authState.isLoggedIn) {
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 1500);
+    }
+  }, [authState.isLoggedIn]);
 
-const authState = useSelector((state)=> state.auth)
-const [UserLoginMethod ,setUserLoginMethod] = useState(false)
-const[email, setEmail] = useState("")
-const[password, setPassword] = useState("")
-const [username, setUsername] = useState("")
-const [name, setName] = useState("")
+  // Clear messages when toggling mode
+  useEffect(() => {
+    dispatch(emptyMessage());
+  }, [isLoginMode]);
 
-// while using authsate keep eye on authreducer
-useEffect(() => {
-  if (authState.isLoggedIn) {
-    // Show success message for 2 seconds, then redirect
-    const timer = setTimeout(() => {
-      router.push("/dashboard");
-    }, 2000);
-    return () => clearTimeout(timer);
-  }
-}, [authState.isLoggedIn]);
+  const handleRegister = () => {
+    if (!username.trim() || !email.trim() || !password || !name.trim()) {
+      alert('Please fill all fields to register.');
+      return;
+    }
+    dispatch(registerUser({ username: username.trim(), email: email.trim(), password, name: name.trim() }));
+  };
 
-useEffect(()=>{
-dispatch(emptyMessage())
-},[UserLoginMethod])
-
-
-const handleRegister = () => {
-  // setUserLoginMethod(false)
-  dispatch(registerUser({username, email, password,name}))
-
-}
-const handlLogin = () => {
-  // setUserLoginMethod(true) 
-  dispatch(loginUser({email, password}))
-}
-
-useEffect(()=>{
-  if(localStorage.getItem("token")){
-    router.push("/dashboard")
-  }
-})
-
-
-
+  const handleLogin = () => {
+    if (!email.trim() || !password) {
+      alert('Please enter email and password.');
+      return;
+    }
+    dispatch(loginUser({ email: email.trim(), password }));
+  };
 
   return (
-    // <div> LoginComponent</div>
     <UserLayout>
-
-       <div className={style.container}>
-
+      <div className={style.container}>
         <div className={style.cardContainer}>
           <div className={style.cardContainer_left}>
-            <p className={style.cardleft_heading}>{UserLoginMethod ? "Sign in " : "Sign up"}</p>
-                  {/* {authState.message} */}
+            <p className={style.cardleft_heading}>{isLoginMode ? 'Sign in' : 'Sign up'}</p>
+            <p style={{ color: authState.isError ? 'red' : 'green' }}>{authState.message}</p>
 
-            <p style={{color : authState.isError ? "red" : "green"}}>{authState.message}</p>
-          <div className={style.inputContainer}>
+            <div className={style.inputContainer}>
+              {!isLoginMode && (
+                <div className={style.inputRow}>
+                  <input
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                    className={style.inputField}
+                    type="text"
+                    placeholder="Username"
+                  />
+                  <input
+                    onChange={(e) => setName(e.target.value)}
+                    value={name}
+                    className={style.inputField}
+                    type="text"
+                    placeholder="Full Name"
+                  />
+                </div>
+              )}
 
-         {!UserLoginMethod &&   <div className={style.inputRow}>
-            <input  onChange={(e)=> setUsername(e.target.value)} className={style.inputField} type="text"  placeholder='Username'/>
-            <input  onChange={(e)=> setName(e.target.value)} className={style.inputField} type="text"  placeholder='Name'/>
-          </div>}
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                className={style.inputField}
+                type="email"
+                placeholder="Email"
+              />
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                className={style.inputField}
+                type="password"
+                placeholder="Password"
+              />
 
-           
-
-
-            <input  onChange={(e)=> setEmail(e.target.value)} className={style.inputField} type="email"  placeholder='Email'/>
-            <input onChange={(e)=> setPassword(e.target.value)} className={style.inputField} type="Password"  placeholder='Password'/>
-
-            <div  onClick={()=>{
-              if(UserLoginMethod){
-                handlLogin()
-              }else{
-                handleRegister()
-              }
-            }} className={style.buttonWithOutline}>
-            <p>{UserLoginMethod ? "Sign in " : "Sign up"}</p>
-
+              <div
+                onClick={isLoginMode ? handleLogin : handleRegister}
+                className={style.buttonWithOutline}
+              >
+                <p>{isLoginMode ? 'Sign in' : 'Sign up'}</p>
+              </div>
             </div>
-
           </div>
-
-
-          </div>
-
 
           <div className={style.cardContainer_right}>
-            
-            
-            <div>
-              {UserLoginMethod ? <p>Don't have an Account? </p> : <p>Already have an Account?</p>}
-              <div  onClick={()=>{
-              setUserLoginMethod(!UserLoginMethod)
-            }}  
-            style={{color:"black",textAlign:"center"}}className={style.buttonWithOutline}>
-            <p>{UserLoginMethod ? "Sign up " : "Sign in"}</p>
-
-          </div>
-
+            <p>{isLoginMode ? "Don't have an account?" : 'Already have an account?'}</p>
+            <div
+              onClick={() => setIsLoginMode(!isLoginMode)}
+              className={style.buttonWithOutline}
+              style={{ color: 'black', textAlign: 'center' }}
+            >
+              <p>{isLoginMode ? 'Sign up' : 'Sign in'}</p>
             </div>
-            
-
-
+          </div>
         </div>
-       </div>
-       </div>
-
-
-
-
-
+      </div>
     </UserLayout>
-  
-
-)}// export default LoginComponent  
+  );
+}

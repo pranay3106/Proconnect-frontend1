@@ -59,7 +59,8 @@ export const registerUser = createAsyncThunk(
                 localStorage.setItem("token", response.data.token);
             } else {
                 return thunkAPI.rejectWithValue(
-                    { message: "Registration failed. Please try again." }
+                    { user: response.data.user, token: response.data.token, message: response.data.message}
+                    
                 );
             }
 
@@ -71,9 +72,9 @@ export const registerUser = createAsyncThunk(
             );
 
         } catch (err) {
-            return thunkAPI.rejectWithValue(
-                err.response
-            );
+            return thunkAPI.rejectWithValue({
+                user: response.data.user, token: response.data.token, message: response.data.message
+            });
         }
     }
 )

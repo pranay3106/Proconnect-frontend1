@@ -13,6 +13,19 @@ import {
 import { getAllPosts } from '@/config/redux/action/postAction'
 import { useDispatch, useSelector } from 'react-redux'
 
+const DEFAULT_PROFILE_PIC = "https://res.cloudinary.com/duvlhhzaq/image/upload/v1751558256/default_mkj0mm.jpg"
+
+// Checks if image is custom or not
+const isValidImage = (img) => {
+  if (!img) return false
+  return !img.toLowerCase().includes("default")
+}
+
+const getProfileImageUrl = (user) => {
+  const img = user.profilePicture
+  return isValidImage(img) ? `${Base_Url}/uploads/${img}` : DEFAULT_PROFILE_PIC
+}
+
 export default function ViewProfilePage({ userProfile }) {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -24,7 +37,6 @@ export default function ViewProfilePage({ userProfile }) {
   const [userPosts, setUserPosts] = useState([])
   const [isConnectionNull, setIsConnectionNull] = useState(true)
 
-  // Load posts and connections
   useEffect(() => {
     const token = localStorage.getItem("token")
     dispatch(getAllPosts())
@@ -32,13 +44,11 @@ export default function ViewProfilePage({ userProfile }) {
     dispatch(getMyConnectonRequests({ token }))
   }, [dispatch])
 
-  // Filter posts for the current user
   useEffect(() => {
     const filteredPosts = postReducer.posts.filter(post => post.userId.username === router.query.username)
     setUserPosts(filteredPosts)
   }, [postReducer.posts, router.query.username])
 
-  // Check connection status
   useEffect(() => {
     const connections = Array.isArray(authState.connections) ? authState.connections : []
     const connectionRequests = Array.isArray(authState.connectionRequests) ? authState.connectionRequests : []
@@ -46,7 +56,6 @@ export default function ViewProfilePage({ userProfile }) {
     setIsCurrentUserInConnection(false)
     setIsConnectionNull(true)
 
-    // Check if user is already in accepted connection
     const accepted = connections.find(conn =>
       conn.connectedUserId?._id === userProfile.userId._id && conn.status_accepted === true
     )
@@ -55,7 +64,6 @@ export default function ViewProfilePage({ userProfile }) {
       setIsConnectionNull(false)
     }
 
-    // Check if request is pending
     const pending = connectionRequests.find(conn =>
       conn.connectedUserId?._id === userProfile.userId._id
     )
@@ -86,7 +94,11 @@ export default function ViewProfilePage({ userProfile }) {
       <DashboardLayout>
         <div className={styles.container}>
           <div className={styles.backDropContainer}>
-            <img className={styles.backDrop} src={`${Base_Url}/uploads/${userProfile.userId.profilePicture}`} />
+            <img
+              className={styles.backDrop}
+              src={getProfileImageUrl(userProfile.userId)}
+              alt="User Profile"
+            />
           </div>
 
           <div className={styles.profileContainer_details}>
@@ -124,23 +136,19 @@ export default function ViewProfilePage({ userProfile }) {
                 </div>
 
                 <br />
-                  <div className="workHistory">
-            <h4>Work History</h4>
-            <div className={styles.workHistoryContainer}>
-              {userProfile.pastWork.map((work, index) => (
-                <div key={index} className={styles.workHistoryCard}>
-                  <p style={{ fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.8rem" }}>
-                    {work.company} = {work.position}
-                  </p>
-                  <p>{work.years}</p>
+                <div className="workHistory">
+                  <h4>Work History</h4>
+                  <div className={styles.workHistoryContainer}>
+                    {userProfile.pastWork.map((work, index) => (
+                      <div key={index} className={styles.workHistoryCard}>
+                        <p style={{ fontWeight: "bold", display: "flex", alignItems: "center", gap: "0.8rem" }}>
+                          {work.company} = {work.position}
+                        </p>
+                        <p>{work.years}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-
-
-
               </div>
 
               <div style={{ flex: "0.2" }}>
@@ -150,7 +158,7 @@ export default function ViewProfilePage({ userProfile }) {
                     <div className={styles.card}>
                       <div className={styles.card_profileContainer}>
                         {post.media ? (
-                          <img src={`${Base_Url}/uploads/${post.media}`} />
+                          <img src={`${Base_Url}/uploads/${post.media}`} alt="post media" />
                         ) : (
                           <div style={{ width: "3.4rem", height: "3.4rem" }}></div>
                         )}
@@ -162,8 +170,6 @@ export default function ViewProfilePage({ userProfile }) {
               </div>
             </div>
           </div>
-
-        
         </div>
       </DashboardLayout>
     </UserLayout>
