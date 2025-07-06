@@ -27,12 +27,14 @@ const token= true
  <div className={styles.navbarOptions}>
        {authState.profilefetched &&   authState.user && authState.user.userId && (
                         <div  className={styles.profile}>
-                          <div style={{display:"flex",gap:"1.2rem",}}>
-                          <p  onClick ={
-                            ()=>{
-                              router.push("/profile")
-                            }
-                          }style={{fontWeight:"bold",cursor:"pointer",justifyContent:"center",alignItems:"center",padding:"1rem"}}>Profile</p>
+                          <div style={{display:"flex",gap:"1.2rem",}} >
+                          <div  className={styles.buttonProfile}>
+                            <p  onClick ={
+                              ()=>{
+                                router.push("/profile")
+                              }
+                            }style={{fontWeight:"bold",cursor:"pointer",justifyContent:"center",alignItems:"center",padding:"1rem"}}>Profile</p>
+                          </div>
 
 
                            { token ?

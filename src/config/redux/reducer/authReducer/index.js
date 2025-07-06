@@ -50,14 +50,14 @@ const authSlice = createSlice({
             builder
                 .addCase(loginUser.pending, (state) => {
                     state.isLoading = true;
-                    state.message="knoking on the door"
+                    state.message="please wait..."
                 })
                 .addCase(loginUser.fulfilled, (state, action) => {
                     state.isLoading = false;
                     state.isSuccess = true;
                     state.isLoggedIn=true;
                     state.isError=false;
-                    // state.user = action.payload;
+                    state.user = action.payload;
                     state.message = "login is succesfully";
                 })
                 .addCase(loginUser.rejected, (state, action) => {
@@ -70,7 +70,7 @@ const authSlice = createSlice({
 })
                 
                 .addCase(registerUser.pending,(state)=>{
-                    state.isLoading = true,
+                    state.isLoading = true;
                     state.isError = false;
                     state.isSuccess = false;    
                     state.isLoggedIn = false;
@@ -78,6 +78,8 @@ const authSlice = createSlice({
                 }
 
                 )
+
+                
                 .addCase(registerUser.fulfilled, (state, action) => {
                     state.isLoading = false;
                     state.isSuccess = true;
@@ -97,6 +99,11 @@ const authSlice = createSlice({
 
 
                 })
+
+                .addCase(getAboutUser.pending, (state) => {
+    state.isLoading = true;
+    state.profilefetched = false;
+})
                 .addCase(getAboutUser.fulfilled,(state,action)=>{
                     // console.log("getAboutUser payload:", action.payload);
                     state.isLoading=false;

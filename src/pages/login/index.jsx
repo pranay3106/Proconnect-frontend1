@@ -5,6 +5,7 @@ import { loginUser, registerUser } from '@/config/redux/action/authAction';
 import { emptyMessage } from '@/config/redux/reducer/authReducer';
 import UserLayout from '@/layout/UserLayout';
 import style from './style.module.css';
+import { getAboutUser } from '@/config/redux/action/authAction';
 
 export default function LoginComponent() {
   const router = useRouter();
@@ -18,11 +19,13 @@ export default function LoginComponent() {
   const [name, setName] = useState('');
 
   // Auto-redirect if already logged in
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      router.push('/dashboard');
-    }
-  }, []);
+ useEffect(() => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    dispatch(getAboutUser({ token })) // optional: validate token
+    router.push('/dashboard');
+  }
+}, []);
 
   // Redirect after login
   useEffect(() => {

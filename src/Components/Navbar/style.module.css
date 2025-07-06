@@ -1,5 +1,6 @@
 .Container{
     padding: 1.2rem;
+    margin-top:-1rem;
 }
 
 
@@ -26,31 +27,40 @@
 
 .buttonJoin{
     
-    width: fit-content;
+    /* width: fit-content; */
     font-size: 1.4rem;
     cursor:pointer;
     user-select: none;
     transition: all 0.2s;
     margin-top: 0.8rem;
     font-size: 1.4rem;
-    background: rgb(6, 193, 255);
+    background: rgb(255, 6, 155);
     color: white;
-    padding-inline: 1.2rem;
-    padding-block: 0.6rem;
+    /* padding-inline: 1.2rem; */
+    /* padding-block: 1rem; */
     border-radius: 1.3rem;
-    border: 2px solid rgb(6, 193, 255);;
+    border: 2px solid rgb(255, 6, 155);
+    height: 2.3rem;
+    width: 6.5rem;
+    text-align: center;
+    
 
+}
+.buttonJoin > p{
+    padding-bottom: 0.2rem;
 }
 
 .buttonJoin:hover{
     background: white;;
-    color: rgb(6, 193, 255);;
+    color: rgb(255, 6, 155);
 
 
 }
 
+
+
 .profile{
-       font-size: 1.4rem;
+       font-size: 1.2rem;
     /* bakground: rgb(6, 193, 255); */
     /* color: white; */
     padding-inline: 1.2rem;
@@ -58,4 +68,15 @@
     border-radius: 1.3rem;
     /* border: 2px solid rgb(6, 193, 255); */
 /*  */
+}
+
+@media only screen and (max-width:600px){
+    .buttonJoin{
+        padding: 0vh;
+        /* margin: 2vw; */
+        margin-right: -5vh;
+        height: 2rem;
+        width: 6rem;
+        text-align: center;
+    }
 }

@@ -18,6 +18,7 @@
   align-items: center;
   box-shadow: 10px 10px 10px 0px  rgba(167, 77, 107, 0.1);
   border-left: 0.01rem double rgb(207, 196, 196);
+  border-radius: 1.2rem;
   width: 80%;
   cursor: pointer;
 

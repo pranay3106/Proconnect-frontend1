@@ -27,12 +27,14 @@
 }
 .cardContainer_right{
     flex:0.4;
-    background: rgb(5, 43, 231);
+    display: flex;
+    flex-direction: column;
+    background: rgb(6, 44, 158);
     display: flex;
     color: white;
     justify-content: center;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
     padding: 1.2rem;
 }
 

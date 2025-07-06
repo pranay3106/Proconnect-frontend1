@@ -106,6 +106,12 @@ const isProfileUpdated =
   userProfile?.userId?.name !== authState.user?.userId?.name ||
   userProfile?.bio !== authState.user?.bio ||
   JSON.stringify(userProfile?.pastWork) !== JSON.stringify(authState.user?.pastWork);
+
+  
+  const getPostMediaUrl = (media) =>
+    media?.trim() || null;
+
+  
  
 
 useEffect(() => {
@@ -239,11 +245,12 @@ useEffect(() => {
             <div style={{flex:"0.2"}}>
               <h1>Recent Activity</h1>
               {userPosts.map((post)=>{
+                const mediaUrl = getPostMediaUrl(post.media);
                 return(
                   <div key={post._id} className={styles.postCard}>
                     <div className={styles.card}>
                       <div className={styles.card_profileContainer}>
-                        {post.media !=="" ? <img src={`${Base_Url}/uploads/${post.media}`}/>
+                        {post.media !=="" ? <img src={mediaUrl}/>
                         : 
                         <div style={{width:"3.4rem",height:"3.4rem"}}></div>
                         }
