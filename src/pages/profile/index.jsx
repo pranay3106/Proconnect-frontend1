@@ -242,7 +242,7 @@ useEffect(() => {
 
 
             </div>
-            <div style={{flex:"0.2"}}>
+            <div style={{flex:"0.2",marginLeft:"1rem"}}>
               <h1>Recent Activity</h1>
               {userPosts.map((post)=>{
                 const mediaUrl = getPostMediaUrl(post.media);
@@ -250,13 +250,14 @@ useEffect(() => {
                   <div key={post._id} className={styles.postCard}>
                     <div className={styles.card}>
                       <div className={styles.card_profileContainer}>
-                        {post.media !=="" ? <img src={mediaUrl}/>
+                        {post.media !=="" ? <img src={mediaUrl}/> 
                         : 
-                        <div style={{width:"3.4rem",height:"3.4rem"}}></div>
+                        <div  className={styles.blankDiv}style={{width:"3.4rem",height:"3.4rem"}}></div>
                         }
+                        
                         </div>
                         <p>{post.body}</p>
-                        {/* <p>{post}</p> */}
+                  
                     </div>
                   </div>
                 )

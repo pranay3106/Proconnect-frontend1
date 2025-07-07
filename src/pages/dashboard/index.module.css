@@ -297,4 +297,18 @@ border: 1px solid silver;
     
 
     }
+
+    .optionsContainer{
+      
+       border-top:solid rgb(224, 210, 252);
+       max-width: 100vw;
+       min-width: 80vw;
+    }
+
+    .singleCard_profileContainer{
+      /* border: solid black; */
+      margin-left: -0.5rem;
+      display: inline;
+      
+    }
 }

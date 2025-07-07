@@ -13,7 +13,7 @@
     display: flex;
     border-radius: 0.6rem;
     background: wheat;
-    box-shadow: 10px 10px 15px rgb(173,173,173);
+    box-shadow: 10px 10px 15px 5px rgb(173,173,173);
     background: white;
     overflow: hidden;
     width: 80vw;

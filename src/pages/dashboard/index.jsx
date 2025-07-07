@@ -213,7 +213,7 @@ export default function Dashboard() {
                         </div>
                         <p style={{ color: "gray" }}>@{post.userId?.username}</p>
                         <p>{post.body}</p>
-                        {console.log(post)}
+                        {/* {console.log(post)} */}
                         
 
                         {mediaUrl && (

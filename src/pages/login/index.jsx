@@ -57,12 +57,14 @@ export default function LoginComponent() {
     dispatch(loginUser({ email: email.trim(), password }));
   };
 
+
+
   return (
     <UserLayout>
       <div className={style.container}>
         <div className={style.cardContainer}>
           <div className={style.cardContainer_left}>
-            <p className={style.cardleft_heading}>{isLoginMode ? 'Sign in' : 'Sign up'}</p>
+            <p className={style.cardleft_heading}>{isLoginMode ? 'Sign-in' : 'Sign-up'}</p>
             <p style={{ color: authState.isError ? 'red' : 'green' }}>{authState.message}</p>
 
             <div className={style.inputContainer}>

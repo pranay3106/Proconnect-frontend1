@@ -29,7 +29,7 @@ const router = useRouter();
                         <div  onClick={()=>{
                           router.push("/login");
                         }}className={styles.buttonJoin}>
-                          <p>Join now</p>
+                          <p className={styles.buttonJoinText}>Join now</p>
                         </div>
                     </div>
                     <div className={styles.mainContainer_right}>
