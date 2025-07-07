@@ -256,6 +256,7 @@ useEffect(() => {
                         }
                         </div>
                         <p>{post.body}</p>
+                        {/* <p>{post}</p> */}
                     </div>
                   </div>
                 )

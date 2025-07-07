@@ -188,13 +188,12 @@ export default function ViewProfilePage({ userProfile }) {
                   <div key={post._id} className={styles.postCard}>
                     <div className={styles.card}>
                       <div className={styles.card_profileContainer}>
-                        {post.media ? (
-                          <img src={`${Base_Url}/uploads/${post.media}`} alt="post media" />
-                        ) : (
-                          <div style={{ width: "3.4rem", height: "3.4rem" }}></div>
-                        )}
-                      </div>
-                      <p>{post.body}</p>
+                        {post.media !=="" ? <img src={post.media}/>
+                        : 
+                        <div style={{width:"3.4rem",height:"3.4rem"}}></div>
+                        }
+                        </div>
+                        <p>{post.body}</p>
                     </div>
                   </div>
                 ))}
