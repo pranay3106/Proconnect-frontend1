@@ -1,3 +1,7 @@
+.homeContainer{
+  margin-bottom: 3rem;
+}
+
 .allUserProfile{
   max-width: 80%;
   display: flex;
@@ -17,9 +21,12 @@
   padding: 1.3rem;
   align-items: center;
   box-shadow: 10px 10px 10px 0px  rgba(167, 77, 107, 0.1);
-  border-left: 0.01rem double rgb(207, 196, 196);
+  border: 0.2rem double rgb(223, 214, 251);
+  border-left: 0.05rem double rgb(121, 88, 221);
+
   border-radius: 1.2rem;
   width: 80%;
+  /* border-block-end: 1px solid rgb(240, 185, 185); */
   cursor: pointer;
 
 }
@@ -35,6 +42,28 @@ transform: scale(1.04);
      object-fit: cover;
      width: 2.5rem;
 
+}
+@media only screen and (max-width:600px){
+    .allUserProfile{
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .userCard{
+    width: 90%;
+    border:  0.5px solid rgb(106, 132, 240);
+  /* border: 0.2rem double rgb(223, 214, 251); */
+
+  }
+   .userCard h1{
+    font-size: 1.2rem;
+
+  }
+
+  .userCard_image{
+    height: 2rem;
+    width: 2rem;
+  }
+  
 }
 
 /*  */

@@ -1,6 +1,8 @@
 .Container{
     padding: 1.2rem;
     margin-top:-1rem;
+    
+
 }
 
 
@@ -78,10 +80,19 @@
         text-align: center;
         margin-right: 0.5rem;
          width: fit-content;
-    height: 2rem;
-    width: 5rem;
+    height: 2.5rem;
+    width: 6rem;
     font-size: 0.8rem;
     /* padding-left: 1.5rem; */
     padding-top: 0.4rem;
+    border: solid rgb(84, 76, 98);
+    
+    }
+    .buttonJoin > p {
+        font-size: 1.1rem;
+    }
+    .Container{
+        background: rgb(226, 229, 223);
+
     }
 }

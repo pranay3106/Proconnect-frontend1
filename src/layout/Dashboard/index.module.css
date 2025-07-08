@@ -1,6 +1,7 @@
 .homeContainer{
     display: flex;
     min-height: 100vh;
+    /* border: solid black; */
 }
 
 
@@ -110,6 +111,8 @@
     }
     .homeContainer{
         display: block;
+        background: rgb(226, 229, 223);
+
     }
     .homeContainer_leftbar{
         display: none;

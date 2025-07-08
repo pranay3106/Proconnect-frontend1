@@ -22,8 +22,14 @@ export const getAllPosts = createAsyncThunk(
 
 export const createPost = (formData) => async (dispatch, getState) => {
   try {
-    const res = await clientServer.post("/post", formData); // ✅ Don't set headers manually
+    const token = localStorage.getItem("token")
+    // formData.append("token",token);
+//   for (let [key, value] of formData.entries()) {
+//   console.log(key, value);  // Should show token, body, and media
+// }
 
+    const res = await clientServer.post("/post", formData); // ✅ Don't set headers manually
+    
     dispatch({ type: "CREATE_POST_SUCCESS", payload: res.data });
     return { payload: res.data };
   } catch (err) {

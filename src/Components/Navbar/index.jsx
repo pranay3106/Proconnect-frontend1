@@ -38,7 +38,7 @@ console.log(isLoggedIn)
 
        {authState.profilefetched &&   authState.user && authState.user.userId && (
                         <div  className={styles.profile}>
-                          <div style={{display:"flex",gap:"1.2rem",}} >
+                          <div style={{display:"flex",gap:"1.2rem",marginRight:"-2rem"}} >
                           <div  className={styles.buttonProfile}>
                             <p  onClick ={
                               ()=>{

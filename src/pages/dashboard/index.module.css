@@ -287,7 +287,7 @@ border: 1px solid silver;
       width: 50vw;
       min-width: 100px;
        /* height: 10vh; */
-       padding-block: 1rem;
+       padding-block: 1.09rem;
        padding-inline: 0.5rem;
        margin-right: 0.5rem;
        text-align: center;
@@ -310,5 +310,10 @@ border: 1px solid silver;
       margin-left: -0.5rem;
       display: inline;
       
+    }
+    .uploadButton{
+      bottom: 0.1rem;
+      
+
     }
 }
