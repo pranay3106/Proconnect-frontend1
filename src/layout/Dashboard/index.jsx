@@ -76,7 +76,7 @@ const authState = useSelector((state=>state.auth))
                                 <div key={profile._id} className={styles.extreme}>
                                    
                                  <ul className={styles.listing}>
-                                  <li><p>{profile.userId.name}</p></li>
+                                  <li><p>{profile.userId?.name}</p></li>
                                  </ul>
                                     
                                 </div>

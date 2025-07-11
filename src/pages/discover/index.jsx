@@ -57,21 +57,26 @@ export default function DiscoverPage() {
       <DashboardLayout>
         <h1>Discover</h1>
         <div className={styles.allUserProfile}>
-          {authState.allUsers.map(user => (
+          {authState.allUsers
+           .filter(user => user.userId)
+          .map(user => (
+         
+
             <div
               key={user._id}
               className={styles.userCard}
               onClick={() => router.push(`/view_profile/${user.userId.username}`)}
             >
+                 {console.log("hii",authState.allUsers)}
               <img
                 className={styles.userCard_image}
                 src={getProfileImageUrl(user)}
-                alt={`${user.userId.name} profile`}
+                alt={`${user.userId?.name} profile`}
                 loading="lazy"
               />
               <div className={styles.users}>
-                <h1>{user.userId.name}</h1>
-                <p>@{user.userId.username}</p>
+                <h1>{user.userId?.name}</h1>
+                <p>@{user.userId?.username}</p>
               </div>
             </div>
           ))}
