@@ -38,7 +38,7 @@ export default function Dashboard() {
   const [commentText, setCommentText] = useState("");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.removeItem("token");
     if (token) {
       dispatch(setTokenThere());
       dispatch(getAboutUser({ token }));
