@@ -286,11 +286,16 @@ useEffect(() => {
                     setIsModalOpen(false)
 
                     }}className={styles.commentsContainer}>
+
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+</svg>
                     <div
                     onClick={(e)=>{
                         e.stopPropagation()
 
-                    }} className={styles.allCommentsContainer}>   
+                    }} className={styles.allCommentsContainer}> 
+<br />
                                     <input onChange={handleWorkInputChange} name='company' className={styles.inputField} type="text"  placeholder='Enter Company'/>
                                     <input onChange={ handleWorkInputChange} name="position"className={styles.inputField} type="text"  placeholder='Enter Position'/>
                                     <input onChange={handleWorkInputChange}  name="years"className={styles.inputField} type="Number"  placeholder='Years '/>

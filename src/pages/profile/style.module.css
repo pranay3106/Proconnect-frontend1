@@ -206,7 +206,7 @@ align-items: center;
 .allCommentsContainer{
 
   width: 40vw;
-  height: 80vh;
+  height: 50vh;
   background: white;
   position: relative;
   border-radius: 0.8rem;
@@ -256,6 +256,16 @@ align-items: center;
     object-fit: cover;
 }
 
+.commentsContainer > svg {
+  position: absolute;
+  top: 26%;
+  right: 31%;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  color: rgb(249, 6, 6);
+  z-index: 3 ;
+}
 
 @media only screen and (max-width:600px){
     .profileContainer_details{
@@ -268,6 +278,13 @@ align-items: center;
         display: flex;
         flex-direction: column;
         margin-bottom: 2rem;
+    }
+    .allCommentsContainer{
+        width: 85vw;
+        height: 50vh;
+    }
+      .commentsContainer > svg{
+      right: 2.5rem;
     }
  
     
